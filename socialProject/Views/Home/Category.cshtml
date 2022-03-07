@@ -1,0 +1,164 @@
+﻿
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/tur/css/reset.css">
+    <link rel="stylesheet" href="~/tur/css/slick.css">
+    <link rel="stylesheet" href="~/tur/css/jquery.fancybox.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/tur/css/animate.css">
+    <link rel="stylesheet" href="~/tur/css/style.css">
+</head>
+<body>
+
+
+    <header class="HeaderMain SecMain">
+        <div class="container">
+            <div class="headerlogo">
+                <img src="~/tur/images/logo.png" alt="logo" class="logo">
+                <h3 class="logoTextMain">Социальная поддержка населения г.Димитровград</h3>
+                <nav class="navbarHeader">
+                    <ul class="menu__listMain">
+                        <li><a class="btn btn-sm sign-up " asp-action="Index" asp-controller="Home">Главная</a></li>
+                        <li><a class="btn btn-sm sign-up " asp-action="Category" asp-controller="Home">Категории</a></li>
+                        <li><a class="btn btn-sm sign-up " href="#">Волонтерам</a></li>
+                        <li><a class="btn btn-sm sign-up " href="#">Благотворительность</a></li>
+                        <li><a class="btn btn-sm sign-up " href="#">О нас</a></li>
+                        <li><a class="btn btn-sm sign-up " href="#">Контакты</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li>
+                                
+                                <a class="btn btn-sm sign-up " >@User.Identity.Name</a>
+                            </li>
+
+                            if (@User.IsInRole("admin"))
+                            {
+                                <li>
+                                    <a class="btn btn-sm sign-up " asp-action="AdminPage" asp-controller="Home">Администратор</a>
+                                </li>
+                            }
+                            if (@User.IsInRole("user"))
+                            {
+                                <li>
+
+                                    <a class="btn btn-sm sign-up "  asp-action="Index" asp-controller="Person">Пользователь</a>
+
+                                </li>
+                            }
+
+                            <li>
+                                <form method="post" asp-controller="Account" asp-action="Logout">
+                                    <input type="submit" class="btn btn-sm sign-up" value="Выход" />
+
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a class="btn btn-sm sign-up" asp-controller="Account" asp-action="Login">Войти</a></li>
+                            <li><a class="btn btn-sm sign-up" asp-controller="Account" asp-action="Register">Зарегистрироваться</a></li>
+
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <section class="MainPanels">
+        <div class="container">
+            <div class="WrapperPanel">
+                <div class="Allpanels">
+                    <div class="panel panel-default">
+                        <div class="panel-body border-color-blue" style="padding-top: 0px; padding-bottom: 0px; border-radius: 8px;">
+                            <div class="panel-info">
+                                <div class="panel-title">
+                                    <h3>Категория : Дети</h3>
+                                </div>
+                                <div class="description">
+                                    Краткое Описание
+                                </div>
+                                <a class="btn btn-sm sign-up infobtn" asp-action="Children" asp-controller="Home">Подробнее</a>
+                            </div>
+                            <div class="panel-image">
+                                <img src="~/tur/images/childrens.png" alt="Images" class="image-categories">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body border-color-blue" style="padding-top: 0px; padding-bottom: 0px; border-radius: 8px;">
+                            <div class="panel-info">
+                                <div class="panel-title">
+                                    <h3>Категория : будет разработана позже</h3>
+                                </div>
+                                <div class="description">
+                                    Краткое Описание
+                                </div>
+                                <a class="btn btn-sm sign-up infobtn" href="#">Подробнее</a>
+                            </div>
+                            <div class="panel-image">
+                                Image categories
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body border-color-blue" style="padding-top: 0px; padding-bottom: 0px; border-radius: 8px;">
+                            <div class="panel-info">
+                                <div class="panel-title">
+                                    <h3>Категория : будет разработана позже</h3>
+                                </div>
+                                <div class="description">
+                                    Краткое Описание
+                                </div>
+                                <a class="btn btn-sm sign-up infobtn" href="#">Подробнее</a>
+                            </div>
+                            <div class="panel-image">
+                                Image categories
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Navigate">
+                    <div class="panel panel-default">
+                        <div class="panel-body border-color-blue" style="padding-top: 0px; padding-bottom: 0px; border-radius: 8px;">
+                            <div class="seach">
+                                <div class="d1">
+                                    <form action="" method="get">
+                                        <input name="s" placeholder="Искать здесь..." type="search">
+                                        <button type="submit"></button>
+                                    </form>
+                                </div>
+
+                                <div class="filters">
+                                    <div>
+                                        <input type="checkbox" id="children" name="children"
+                                               checked>
+                                        <label for="children">Дети</label>
+                                    </div>
+
+                                    <div>
+                                        <input type="checkbox" id="horns" name="horns">
+                                        <label for="horns">...</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/tur/js/slick.min.js"></script>
+    <script src="~/tur/js/jquery.fancybox.min.js"></script>
+    <script src="~/tur/js/main.js"></script>
+</body>

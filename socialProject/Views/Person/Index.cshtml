@@ -1,0 +1,176 @@
+﻿@model socialProject.ViewModels.PersonViewModel
+@{
+    Layout = null;
+}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/tur/css/reset.css">
+    <link rel="stylesheet" href="~/tur/css/slick.css">
+    <link rel="stylesheet" href="~/tur/css/jquery.fancybox.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/tur/css/animate.css">
+    <link rel="stylesheet" href="~/tur/css/style.css">
+</head>
+<body>
+
+
+    <header class="HeaderMain SecMain">
+        <div class="container">
+            <div class="headerlogo">
+                <img src="~/tur/images/logo.png" alt="logo" class="logo">
+                <h3 class="logoTextMain">Социальная поддержка населения г.Димитровград</h3>
+                <nav class="navbarHeader">
+                    <ul class="menu__listMain">
+                        <li><a class="btn btn-sm sign-up" asp-action="Index" asp-controller="Home">Главная</a></li>
+                        <li><a class="btn btn-sm sign-up" asp-action="Category" asp-controller="Home">Категории</a></li>
+                        <li><a class="btn btn-sm sign-up " href="#">Волонтерам</a></li>
+                        <li><a class="btn btn-sm sign-up " href="#">Благотворительность</a></li>
+                        <li><a class="btn btn-sm sign-up " href="#">О нас</a></li>
+                        <li><a class="btn btn-sm sign-up " href="#">Контакты</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li>
+
+                                <a class="btn btn-sm sign-up ">@User.Identity.Name</a>
+                            </li>
+
+                            if (@User.IsInRole("admin"))
+                            {
+                                <li>
+                                    <a class="btn btn-sm sign-up " asp-action="AdminPage" asp-controller="Home">Администратор</a>
+                                </li>
+                            }
+                            if (@User.IsInRole("user"))
+                            {
+                                <li>
+
+                                    <a class="btn btn-sm sign-up " asp-action="Index" asp-controller="Person">Пользователь</a>
+
+                                </li>
+                            }
+
+                            <li>
+                                <form method="post" asp-controller="Account" asp-action="Logout">
+                                    <input style="color:black;" type="submit" class="btn btn-sm sign-up" value="Выход" />
+
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a class="btn btn-sm sign-up" asp-controller="Account" asp-action="Login">Войти</a></li>
+                            <li><a class="btn btn-sm sign-up" asp-controller="Account" asp-action="Register">Зарегистрироваться</a></li>
+
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+
+    <section>
+        <div class="container">
+            <div class="WrappCabinet">                
+                <div class="cabinetSection">
+                    <h2>Личный кабинет</h2>
+
+                    <ul class="infoUser">
+
+                        <li class="form-user">
+                            <label ><b>Фамилия</b></label>
+                            <input type="text" value="@Model.FirstName" name="FirstName" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Имя</b></label>
+                            <input type="text" value="@Model.Name" name="Name" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Отчество</b></label>
+                            <input type="text" value="@Model.LastName" name="LastName" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Дата рождения</b></label>
+                            <input type="text" value="@Model.DateOfBirth" name="DateOfBirth" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Место рождения</b></label>
+                            <input type="text" value="@Model.BornPlace" name="BornPlace" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Адрес</b></label>
+                            <input type="text" value="@Model.Address" name="Address" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Телефон</b></label>
+                            <input type="text" value="@Model.PhoneNumber" name="PhoneNumber" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Номер СНИЛС</b></label>
+                            <input type="text" value="@Model.SnilsNumber" name="SnilsNumber" readonly required>
+                        </li>
+
+
+                        <li class="form-user">
+                            <label ><b>Номер паспорта</b></label>
+                            <input type="text" value="@Model.PasportNumber" name="PasportNumber" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Серия паспорта</b></label>
+                            <input type="text" value="@Model.PasportSeria" name="PasportSeria" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Дата выдачи</b></label>
+                            <input type="text" value="@Model.DateOfIssue" name="DateOfIssue" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Кем выдано</b></label>
+                            <input type="text" value="@Model.IssueBy" name="IssueBy" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Код подразделения</b></label>
+                            <input type="text" value="@Model.DepartmentCode" name="DepartmentCode" readonly required>
+                        </li>
+
+                        <li class="form-user">
+                            <label ><b>Пол</b></label>
+                            <input type="text" value="@Model.SexOfPerson" name="SexOfPerson" readonly required>
+                        </li>
+
+
+                    </ul>
+
+
+
+                </div>
+
+                <div class="CabinetNav">
+                    <a class="btn btn-sm sign-up infobtn cabinetBTN" asp-action="Create" asp-controller="Pasport">Заполнить паспорт</a>
+                    <a class="btn btn-sm sign-up infobtn cabinetBTN" asp-action="Create" asp-controller="Snils">Заполнить СНИЛС</a>
+                    <a class="btn btn-sm sign-up infobtn cabinetBTN" asp-action="Index" asp-controller="Document">Мои заявки</a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
