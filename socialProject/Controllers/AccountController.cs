@@ -44,7 +44,7 @@ namespace socialProject.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "user");
+                    await _userManager.AddToRoleAsync(user, "user"); //добавление роли "user" для пользователя 
                     await _signInManager.SignInAsync(user, false); // установка куки
                     return RedirectToAction("Index", "Home");
                 }
